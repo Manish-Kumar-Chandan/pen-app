@@ -1,0 +1,30 @@
+{
+  "development": {
+    "username": "postgres",
+    "password": "bitpass0ui",
+    "database": "penapp",
+    "host": "localhost",
+    "dialect": "postgresql"
+  },
+  "test": {
+    "username": "postgres",
+    "password": "bitpass0ui",
+    "database": "penapp",
+    "host": "localhost",
+    "dialect": "postgresql"
+  },
+  "production": {
+    "username": "postgres",
+    "password": "bitpass0ui",
+    "database": "penapp",
+    "host": "localhost",
+    "dialect": "postgresql"
+  },
+  "local": {
+    "username": "postgres",
+    "password": "bitpass0ui",
+    "database": "penapp",
+    "host": "localhost",
+    "dialect": "postgresql"
+  }
+}

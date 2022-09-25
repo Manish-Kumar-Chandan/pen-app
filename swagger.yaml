@@ -1,0 +1,207 @@
+paths:
+  # [POST] api/register
+  /api/register:
+    post:
+      tags:
+        - User Api
+      summary: Register New User
+      parameters:
+        - name: body
+          in: body
+          description: user Data
+          required: true
+          schema:
+            $ref: "#/definitions/usersRegister"
+      responses:
+        200:
+          description: "Registration Done!"
+        400:
+          description: "Bad Request :- email must be unique, nickname must be unique, Phone Number is Required"
+        500:
+          description: "Server Error"
+
+  # [POST] login
+  /api/login:
+    post:
+      tags:
+        - User Api
+      summary: User Login Api
+      parameters:
+        - name: body
+          in: body
+          description: user Data
+          required: true
+          schema:
+            $ref: "#/definitions/userLogin"
+      responses:
+        200:
+          description: "OK"
+        400:
+          description: "Bad Request"
+        500:
+          description: "Server Error"
+
+  # [PATCH] User can Update Info
+  /api/users:
+    patch:
+      tags:
+        - User Api
+      summary: User can Update Phone Number
+      parameters:
+        - name: phoneNumber
+          in: body
+          description: new phone number of the user
+          required: true
+          schema:
+            $ref: "#/definitions/updateUser"
+      responses:
+        200:
+          description: "OK"
+        401:
+          description: "Unauthorized"
+        400:
+          description: "Bad Request"
+        500:
+          description: "Server Error"
+
+  # [GET] Fetch all users
+  /api/allusers:
+    get:
+      tags:
+        - Global Api
+      summary: Get All Users
+      responses:
+        200:
+          description: "OK"
+        500:
+          description: "Server Error"
+
+  # [GET] User can Update Info
+  /api/logout:
+    get:
+      tags:
+        - User Api
+      summary: Logout Current User
+      responses:
+        200:
+          description: "OK"
+        401:
+          description: "Unauthorized"
+        500:
+          description: "Server Error"
+
+  # [GET] User Info
+  /api/user:
+    get:
+      tags:
+        - Admin Api
+      summary: Admin can find User by email or nickname
+      parameters:
+        - name: body
+          in: body
+          description: user Data
+          required: true
+          schema:
+            $ref: "#/definitions/findUser"
+      responses:
+        200:
+          description: "OK"
+        401:
+          description: "Unauthorized"
+        400:
+          description: "Bad Request"
+        500:
+          description: "Server Error"
+
+  # [DELETE] User Info
+  /api/user?{id}:
+    delete:
+      tags:
+        - Admin Api
+      summary: Admin can delete User
+      parameters:
+        - name: id
+          in: path
+          description: id of the user
+          required: true
+          schema:
+            $ref: "#/definitions/deleteUser"
+      responses:
+        200:
+          description: "OK"
+        401:
+          description: "Unauthorized"
+        400:
+          description: "Bad Request"
+        500:
+          description: "Server Error"
+
+# definitions
+definitions:
+  usersRegister:
+    type: object
+    required:
+      - nickname
+      - email
+      - password
+      - phoneNumber
+      - role
+    properties:
+      nickname:
+        type: string
+        description: user name
+      email:
+        type: string
+        description: user Email
+      password:
+        type: string
+        description: user Password
+      phoneNumber:
+        type: string
+        description: user Phone Number
+      role:
+        type: number
+        description: for basic auth 0 and for admin auth 1
+  userLogin:
+    type: object
+    required:
+      - username
+      - password
+    properties:
+      username:
+        type: string
+        description: user Email
+      password:
+        type: string
+        description: user Password
+
+  findUser:
+    type: object
+    required:
+      - username
+    properties:
+      username:
+        type: string
+        description: admin can find user with Username or Email
+
+  updateUser:
+    type: object
+    required:
+      - phoneNumber
+    properties:
+      phoneNumber:
+        type: string
+        description: New Phone Number
+
+  deleteUser:
+    type: object
+    required:
+      - id
+    properties:
+      id:
+        type: string
+        description: id of the user
+
+schemes:
+  - https
+  - http
